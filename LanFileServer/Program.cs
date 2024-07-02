@@ -25,10 +25,11 @@ public class ServerApp
             Directory.CreateDirectory(@"C:\Users\Public\Documents\LFSR\Received");
         try
         {
-            IPAddress ip = IPAddress.Parse("127.0.0.1");
         PORT_ENTER:
             Console.Write("enter port number: ");
             var port = Int32.Parse(Console.ReadLine());
+            Console.Write("enter ip: ");
+            IPAddress ip = IPAddress.Parse(Console.ReadLine());
             if (port > 99999)
             {
                 Console.WriteLine("invalid port");

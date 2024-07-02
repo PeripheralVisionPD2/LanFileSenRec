@@ -1,0 +1,6 @@
+LanFileClient/bin/
+LanFileClient/obj/
+LanFileServer/bin/
+LanFileServer/obj/
+.vs
+LanFileSenRec.sln
