@@ -1,0 +1,14 @@
+C:\Users\domer\source\repos\LanFileClient\bin\Debug\net8.0\LanFileClient.exe
+C:\Users\domer\source\repos\LanFileClient\bin\Debug\net8.0\LanFileClient.deps.json
+C:\Users\domer\source\repos\LanFileClient\bin\Debug\net8.0\LanFileClient.runtimeconfig.json
+C:\Users\domer\source\repos\LanFileClient\bin\Debug\net8.0\LanFileClient.dll
+C:\Users\domer\source\repos\LanFileClient\bin\Debug\net8.0\LanFileClient.pdb
+C:\Users\domer\source\repos\LanFileClient\obj\Debug\net8.0\LanFileClient.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\domer\source\repos\LanFileClient\obj\Debug\net8.0\LanFileClient.AssemblyInfoInputs.cache
+C:\Users\domer\source\repos\LanFileClient\obj\Debug\net8.0\LanFileClient.AssemblyInfo.cs
+C:\Users\domer\source\repos\LanFileClient\obj\Debug\net8.0\LanFileClient.csproj.CoreCompileInputs.cache
+C:\Users\domer\source\repos\LanFileClient\obj\Debug\net8.0\LanFileClient.dll
+C:\Users\domer\source\repos\LanFileClient\obj\Debug\net8.0\refint\LanFileClient.dll
+C:\Users\domer\source\repos\LanFileClient\obj\Debug\net8.0\LanFileClient.pdb
+C:\Users\domer\source\repos\LanFileClient\obj\Debug\net8.0\LanFileClient.genruntimeconfig.cache
+C:\Users\domer\source\repos\LanFileClient\obj\Debug\net8.0\ref\LanFileClient.dll
