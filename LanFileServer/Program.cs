@@ -20,7 +20,7 @@ public class ServerApp
     {
         Console.WriteLine("/* LanFileSenRec - Server");
         Console.WriteLine("   domer/PeripheralVisionPD2");
-        Console.WriteLine("   7 - 2 - 2024 */");
+        Console.WriteLine("   7 - 5 - 2024 */");
         if (!Directory.Exists(@"C:\Users\Public\Documents\LFSR\Received"))
             Directory.CreateDirectory(@"C:\Users\Public\Documents\LFSR\Received");
         try
@@ -30,6 +30,10 @@ public class ServerApp
             var port = Int32.Parse(Console.ReadLine());
             Console.Write("enter ip: ");
             IPAddress ip = IPAddress.Parse(Console.ReadLine());
+
+            Console.Write("password [leave blank for none]: ");
+            string password = Console.ReadLine();
+            Console.WriteLine(password);
             if (port > 99999)
             {
                 Console.WriteLine("invalid port");
@@ -45,6 +49,7 @@ public class ServerApp
             int size = 0;
             string filename = "";
             byte[] _sdata = new byte[1024];
+            byte[] _pdata = new byte[1024];
             byte[] _ndata = new byte[1024];
             byte[] awaiting = new byte[1];
             awaiting[0] = (byte)0x1;
@@ -59,6 +64,25 @@ public class ServerApp
                     switch (tracker)
                     {
                         case 0:
+                            int bufsize = client.Receive(_pdata);
+                            string pass = Encoding.UTF8.GetString(_pdata, 0, bufsize);
+                            if (password != pass)
+                            {
+                                Console.WriteLine("invalid password...");
+                                tracker = 0;
+                                filename = "";
+                                awaiting[0] = 0x0;
+                                client.Send(awaiting);
+                                client.Close();
+                                return;
+                            }
+
+                            tracker++;
+                            client.Send(awaiting);
+                            client.Close();
+                            return;
+
+                        case 1:
                             Console.WriteLine("reading size...");
                             client.Receive(_sdata);
                             size = BitConverter.ToInt32(_sdata);
@@ -68,17 +92,17 @@ public class ServerApp
                             client.Close();
                             return;
 
-                        case 1:
+                        case 2:
                             Console.WriteLine("reading filename...");
-                            client.Receive(_ndata);
-                            filename = Encoding.UTF8.GetString(_ndata).Replace("\0", "");
+                            int reqsize = client.Receive(_ndata);
+                            filename = Encoding.UTF8.GetString(_ndata, 0, reqsize);
                             Console.WriteLine(filename);
                             tracker++;
                             client.Send(awaiting);
                             client.Close();
                             return;
 
-                        case 2:
+                        case 3:
                             Console.WriteLine($"writing C:\\Users\\Public\\Documents\\LFSR\\Received\\{filename} bytes...");
                             byte[] _rdata = new byte[size];
                             client.Receive(_rdata);
@@ -88,18 +112,19 @@ public class ServerApp
                             filename = "";
                             client.Send(awaiting);
                             client.Close();
+
                             return;
                     }
                 });
 
                 childSocketThread.Start();
             }
-
-            listener.Stop();
         }
         catch (Exception e)
         {
-            Console.WriteLine("error: " + e.StackTrace);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("[error]: " + e.StackTrace);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.ReadLine();
         }
     }
